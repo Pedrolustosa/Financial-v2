@@ -1,0 +1,44 @@
+<div class="container-login">
+  <div class="container-login-central">
+    <div class="container-header">
+      <div class="titulo-login">
+        Financial Flow
+      </div>
+      <div class="info-login">
+        Enter your email and password to log in!
+      </div>
+    </div>
+
+    <div class="container-form">
+      <form class="form-inputs" [formGroup]="loginForm" (submit)="loginUser()">
+        <div class="group-input">
+          <div class="text-info">
+            Email
+          </div>
+          <input class="input-form" type="text" name="email" id="email" placeholder="E-Mail" formControlName="email"
+            required="">
+          <label *ngIf="loginForm.get('email')?.errors?.['required'] &&  loginForm.get('email')?.touched"
+            class="error-input">
+            Required Field!
+          </label>
+        </div>
+
+        <div class="group-input">
+          <div class="text-info">
+            Password
+          </div>
+          <input class="input-form" type="password" name="password" id="password" placeholder="password"
+            formControlName="password" required="">
+          <label *ngIf="loginForm.get('password')?.errors?.['required'] &&  loginForm.get('password')?.touched"
+            class="error-input">
+            Required Field!
+          </label>
+        </div>
+
+        <div class="group-input">
+          <input type="submit" class="btn-login" value="Login" [ngClass]="{'disabled' : !loginForm.valid}" [disabled]="!loginForm.valid">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
