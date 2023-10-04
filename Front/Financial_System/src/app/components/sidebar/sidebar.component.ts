@@ -15,23 +15,18 @@ export class SidebarComponent {
       case 1:
         this.router.navigate(['/dashboard']);
         break;
-
       case 2:
-        this.router.navigate(['/sistema']);
+        this.router.navigate(['/system']);
         break;
-
       case 3:
-        this.router.navigate(['/categoria']);
+        this.router.navigate(['/category']);
         break;
-
       case 4:
-        this.router.navigate(['/despesa']);
+        this.router.navigate(['/expenditure']);
         break;
-
       default:
         break;
     }
-
-    this.menuService.menuSelecionado = menu;
+    this.menuService.selectedMenu = menu;
   }
 }
