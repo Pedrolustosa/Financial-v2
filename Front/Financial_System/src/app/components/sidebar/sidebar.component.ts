@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
