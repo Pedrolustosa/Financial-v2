@@ -1,39 +1,34 @@
 <div class="container-sidebar">
-
-  <div class="grupo-menu">
-    <div class="container-icone-menu">
-      <div class="caixa-menu caixa-menu-texto" (click)="selectMenu(1)"
-        [ngClass]="{'caixa-menu-select': this.menuService.menuSelecionado == 1, '':this.menuService.menuSelecionado!= 1}">
+  <div class="group-menu">
+    <div class="container-icon-menu">
+      <div class="box-menu box-menu-text" (click)="selectMenu(1)"
+        [ngClass]="{'box-menu-select': this.menuService.selectedMenu == 1, '':this.menuService.selectedMenu!= 1}">
         Dashboard
       </div>
     </div>
   </div>
-
-  <div class="grupo-menu">
-    <div class="container-icone-menu">
-      <div class="caixa-menu caixa-menu-texto" (click)="selectMenu(2)"
-        [ngClass]="{'caixa-menu-select': this.menuService.menuSelecionado == 2, '':this.menuService.menuSelecionado!= 2}">
-        Sistema
+  <div class="group-menu">
+    <div class="container-icon-menu">
+      <div class="box-menu box-menu-text" (click)="selectMenu(2)"
+        [ngClass]="{'box-menu-select': this.menuService.selectedMenu == 2, '':this.menuService.selectedMenu!= 2}">
+        System
       </div>
     </div>
   </div>
-
-  <div class="grupo-menu">
-    <div class="container-icone-menu">
-      <div class="caixa-menu caixa-menu-texto" (click)="selectMenu(3)"
-        [ngClass]="{'caixa-menu-select': this.menuService.menuSelecionado == 3, '':this.menuService.menuSelecionado!= 3}">
-        Categoria
+  <div class="group-menu">
+    <div class="container-icon-menu">
+      <div class="box-menu box-menu-text" (click)="selectMenu(3)"
+        [ngClass]="{'box-menu-select': this.menuService.selectedMenu == 3, '':this.menuService.selectedMenu!= 3}">
+        Category
       </div>
     </div>
   </div>
-
-  <div class="grupo-menu">
-    <div class="container-icone-menu">
-      <div class="caixa-menu caixa-menu-texto" (click)="selectMenu(4)"
-        [ngClass]="{'caixa-menu-select': this.menuService.menuSelecionado == 4, '':this.menuService.menuSelecionado!= 4}">
-        Despesa
+  <div class="group-menu">
+    <div class="container-icon-menu">
+      <div class="box-menu box-menu-text" (click)="selectMenu(4)"
+        [ngClass]="{'box-menu-select': this.menuService.selectedMenu == 4, '':this.menuService.selectedMenu!= 4}">
+        Expenditure
       </div>
     </div>
   </div>
-
 </div>
