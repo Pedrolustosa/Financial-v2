@@ -4,6 +4,9 @@ import { CategoryComponent } from './category.component';
 import { CategoryRoutingModule } from './category-rounting.module';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
 import { SidebarModule } from 'src/app/components/sidebar/sidebar.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
+
 
 @NgModule({
   providers: [],
@@ -12,7 +15,10 @@ import { SidebarModule } from 'src/app/components/sidebar/sidebar.module';
     CommonModule,
     CategoryRoutingModule,
     NavbarModule,
-    SidebarModule
+    SidebarModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgSelectModule
   ]
 })
 
