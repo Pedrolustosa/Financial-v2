@@ -4,6 +4,7 @@ import { SystemComponent } from './system.component';
 import { SystemRoutingModule } from './system-rounting.module';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
 import { SidebarModule } from 'src/app/components/sidebar/sidebar.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   providers: [],
@@ -12,7 +13,8 @@ import { SidebarModule } from 'src/app/components/sidebar/sidebar.module';
     CommonModule,
     SystemRoutingModule,
     NavbarModule,
-    SidebarModule
+    SidebarModule,
+    ReactiveFormsModule
   ]
 })
 
