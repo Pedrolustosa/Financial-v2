@@ -1,2 +1,65 @@
 <navbar></navbar>
 <sidebar></sidebar>
+
+<div class="container-base">
+  <div class="content-page">
+    <div class="card-header">
+      <div class="card-title">
+        Expense Register
+      </div>
+    </div>
+    <form class="form-page" [formGroup]="expenditureForm" (submit)="send()">
+      <div class="row">
+        <div class="group-row">
+          <label>Name</label>
+          <input type="text" name="name" id="name" placeholder="Name" formControlName="name" required />
+          <label class="error-input" *ngIf="expenditureForm.get('name')?.errors?.['required'] &&
+                  expenditureForm.get('name')?.touched">
+            Required field!
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="group-row">
+          <label>Value</label>
+          <input type="number" name="value" id="value" placeholder="Value" formControlName="value" required />
+          <label class="error-input" *ngIf="expenditureForm.get('value')?.errors?.['required'] &&
+                  expenditureForm.get('value')?.touched">
+            Required field!
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="group-row">
+          <label>Due date</label>
+          <input type="date" name="date" id="date" placeholder="Date" formControlName="date" required />
+          <label class="error-input" *ngIf="expenditureForm.get('date')?.errors?.['required'] &&
+                  expenditureForm.get('date')?.touched">
+            Required field!
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="group-row">
+          <label>System</label>
+          <ng-select class="select-standard" formControlName="selectSystem" [(ngModel)]="selectSystem"
+            [items]="systemList" bindLabel="name" [multiple]="false" [clearable]="false"
+            [searchable]="false"></ng-select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="group-row">
+          <label>Category</label>
+          <ng-select class="select-standard" formControlName="selectCategory" [(ngModel)]="selectCategory"
+            [items]="categoryList" bindLabel="name" [multiple]="false" [clearable]="false"
+            [searchable]="false"></ng-select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="group-row">
+          <input type="submit" value="Save" class="btn-primary" />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

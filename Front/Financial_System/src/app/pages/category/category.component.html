@@ -1,2 +1,36 @@
 <navbar></navbar>
 <sidebar></sidebar>
+
+<div class="container-base">
+  <div class="content-page">
+    <div class="card-header">
+      <div class="card-title">
+        Category Registration
+      </div>
+    </div>
+    <form class="form-page" [formGroup]="categoryForm" (submit)="send()">
+      <div class="row">
+        <div class="group-row">
+          <label>Name</label>
+          <input type="text" name="name" id="name" placeholder="Name" formControlName="name" required />
+          <label class="error-input" *ngIf="categoryForm.get('name')?.errors?.['required'] &&
+                  categoryForm.get('name')?.touched">
+            Required field!
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="group-row">
+          <label>System</label>
+          <ng-select class="select-standard" [(ngModel)]="systemSelect" [items]="systemList" bindLabel="name"
+            [multiple]="false" [clearable]="false" [searchable]="false"></ng-select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="group-row">
+          <input type="submit" value="Save" class="btn-primary" />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
