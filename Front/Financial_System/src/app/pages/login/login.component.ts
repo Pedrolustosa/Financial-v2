@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from './../../services/login.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,11 +11,11 @@ import { LoginService } from './../../services/login.service';
 })
 export class LoginComponent {
   loginForm: FormGroup | any;
-
   constructor(
     private loginService: LoginService,
     public formBuilder: FormBuilder,
     private router: Router,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -34,7 +35,8 @@ export class LoginComponent {
   loginUser() {
     this.loginService.login(this.dataForm["email"].value, this.dataForm["password"].value).subscribe(
       token => {
-        //alert(token);
+        this.authService.setToken(token);
+        this.authService.AuthenticatedUser(true);
         this.router.navigate(['/dashboard']);
       },
       error => {
