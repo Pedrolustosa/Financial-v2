@@ -36,15 +36,15 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// Gets the all financial system user asynchronously.
+        /// Gets the all financial system user.
         /// </summary>
         /// <param name="emailUser">The email user.</param>
         /// <returns><![CDATA[Task<object>]]></returns>
         [HttpGet("/api/GetAllUserFinancialSystemAsync")]
         [Produces("application/json")]
-        public async Task<object> GetAllUserFinancialSystemUserAsync(string emailUser)
+        public async Task<object> GetAllUserFinancialSystemUser(string emailUser)
         {
-            return await _iFinancialSystem.GetAllUserFinancialSystemAsync(emailUser);
+            return await _iFinancialSystem.GetAllUserFinancialSystem(emailUser);
         }
 
         /// <summary>

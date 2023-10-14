@@ -8,21 +8,19 @@ import { FinancialSystem } from '../models/FinancialSystem';
 })
 
 export class SistemaService {
+  private readonly baseURL = environment["endPoint"];
 
   constructor(private httpClient: HttpClient) { }
 
-  private readonly baseURL = environment["endPoint"];
-
-  AdicionarSistemaFinanceiro(financialSystem: FinancialSystem) {
-    return this.httpClient.post<FinancialSystem>(`${this.baseURL}/AdicionarSistemaFinanceiro`,
-      financialSystem)
+  AddFinancialSystem(financialSystem: FinancialSystem) {
+    return this.httpClient.post<FinancialSystem>(`${this.baseURL}/AddFinancialSystem`, financialSystem)
   }
 
-  ListaSistemasUsuario(emailUsuario: string) {
-    return this.httpClient.get(`${this.baseURL}/ListaSistemasUsuario?emailUsuario=${emailUsuario}`);
+  GetAllUserFinancialSystemUser(emailUser: string) {
+    return this.httpClient.get(`${this.baseURL}/GetAllUserFinancialSystemUser?emailUser=${emailUser}`);
   }
 
-  CadastrarUsuarioNoSistema(idSistema: number, emailUsuario: string) {
-    return this.httpClient.post<any>(`${this.baseURL}/CadastrarUsuarioNoSistema?idSistema=${idSistema}&emailUsuario=${emailUsuario}`, null)
+  RegisterUserIntheSystem(systemId: number, emailUser: string) {
+    return this.httpClient.post<any>(`${this.baseURL}/RegisterUserIntheSystem?systemId=${systemId}&emailUser=${emailUser}`, null)
   }
 }

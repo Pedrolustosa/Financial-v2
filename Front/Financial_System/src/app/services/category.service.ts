@@ -8,17 +8,15 @@ import { Category } from '../models/Category';
 })
 
 export class CategoryService {
+  private readonly baseURL = environment["endPoint"];
 
   constructor(private httpClient: HttpClient) { }
 
-  private readonly baseURL = environment["endPoint"];
-
-  AdicionarCategoria(category: Category) {
-    return this.httpClient.post<Category>(`${this.baseURL}/AdicionarCategoria`,
-      category)
+  GetAllCategoriesUser(emailUser: string) {
+    return this.httpClient.get(`${this.baseURL}/GetAllCategoriesUser?emailUser=${emailUser}`);
   }
 
-  ListarCategoriasUsuario(emailUsuario: string) {
-    return this.httpClient.get(`${this.baseURL}/ListarCategoriasUsuario?emailUsuario=${emailUsuario}`);
+  AddCategory(category: Category) {
+    return this.httpClient.post<Category>(`${this.baseURL}/AddCategory`, category)
   }
 }
