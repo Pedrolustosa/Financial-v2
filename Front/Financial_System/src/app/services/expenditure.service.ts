@@ -8,13 +8,11 @@ import { Expenditure } from '../models/Expenditure';
 })
 
 export class ExpenditureService {
+  private readonly baseURL = environment["endPoint"];
 
   constructor(private httpClient: HttpClient) { }
 
-  private readonly baseURL = environment["endPoint"];
-
-  AdicionarDespesa(expenditure: Expenditure) {
-    return this.httpClient.post<Expenditure>(`${this.baseURL}/AdicionarDespesa`,
-      expenditure)
+  AddExpenditure(expenditure: Expenditure) {
+    return this.httpClient.post<Expenditure>(`${this.baseURL}/AddExpenditure`, expenditure)
   }
 }
