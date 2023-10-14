@@ -69,7 +69,7 @@ namespace WebApi.Controllers
         public async Task<object> AddFinancialSystem(FinancialSystem financialSystem)
         {
             await _iFinancialSystemService.AddFinancialSystem(financialSystem);
-            return Task.FromResult(financialSystem);
+            return financialSystem;
         }
 
         /// <summary>

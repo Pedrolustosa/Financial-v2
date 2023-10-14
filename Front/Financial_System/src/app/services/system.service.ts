@@ -20,7 +20,7 @@ export class SistemaService {
     return this.httpClient.get(`${this.baseURL}/GetAllUserFinancialSystemUser?emailUser=${emailUser}`);
   }
 
-  RegisterUserIntheSystem(systemId: number, emailUser: string) {
-    return this.httpClient.post<any>(`${this.baseURL}/RegisterUserIntheSystem?systemId=${systemId}&emailUser=${emailUser}`, null)
+  AddUserFinancialSystem(systemId: number, emailUser: string) {
+    return this.httpClient.post<any>(`${this.baseURL}/AddUserFinancialSystem?systemId=${systemId}&emailUser=${emailUser}`, null)
   }
 }

@@ -63,7 +63,8 @@ namespace WebApi.Controllers
                     {
                         Id = systemId,
                         UserEmail = emailUser,
-                        Administrator = false
+                        Administrator = false,
+                        CurrentSystem = true
                     });
             }
             catch (Exception)
