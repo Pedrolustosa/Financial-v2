@@ -7,7 +7,7 @@ import { FinancialSystem } from '../models/FinancialSystem';
   providedIn: 'root'
 })
 
-export class SistemaService {
+export class SystemService {
   private readonly baseURL = environment["endPoint"];
 
   constructor(private httpClient: HttpClient) { }
