@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FinancialSystem } from 'src/app/models/FinancialSystem';
 import { SelectModel } from 'src/app/models/SelectModel';
+import { AuthService } from 'src/app/services/auth.service';
 import { MenuService } from 'src/app/services/menu.service';
 import { SystemService } from 'src/app/services/system.service';
 
@@ -15,7 +16,7 @@ export class CategoryComponent {
   systemSelect = new SelectModel();
   categoryForm: FormGroup | any;
 
-  constructor(public menuService: MenuService, public formBuilder: FormBuilder, public systemService: SystemService) { }
+  constructor(public menuService: MenuService, public formBuilder: FormBuilder, public systemService: SystemService, public authService: AuthService,) { }
 
   ngOnInit() {
     this.menuService.selectedMenu = 3;
@@ -34,16 +35,17 @@ export class CategoryComponent {
   }
 
   GetAllCategoriesUser() {
-    this.systemService.GetAllUserFinancialSystemUser("")
+    this.systemService.UserFinancialSystem(this.authService.getEmailUser())
       .subscribe((response: Array<FinancialSystem> | any) => {
-        var listFinancialSystem: SelectModel[] = []
+        var listSistemaFinanceiro: SelectModel[] = [];
         response.forEach((x: { Id: { toString: () => string; }; Name: string; }) => {
           var item = new SelectModel();
           item.id = x.Id.toString();
           item.name = x.Name;
-          listFinancialSystem.push(item);
-        })
-        this.systemList = listFinancialSystem;
-      });
+          listSistemaFinanceiro.push(item);
+        });
+        this.systemList = listSistemaFinanceiro;
+      }
+      )
   }
 }

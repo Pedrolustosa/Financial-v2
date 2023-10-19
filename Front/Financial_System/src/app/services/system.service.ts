@@ -16,11 +16,11 @@ export class SystemService {
     return this.httpClient.post<FinancialSystem>(`${this.baseURL}/AddFinancialSystem`, financialSystem)
   }
 
-  GetAllUserFinancialSystemUser(emailUser: string) {
-    return this.httpClient.get(`${this.baseURL}/GetAllUserFinancialSystemUser?emailUser=${emailUser}`);
+  UserFinancialSystem(emailUser: string) {
+    return this.httpClient.get(`${this.baseURL}/UserFinancialSystem?emailUser=${emailUser}`);
   }
 
-  AddUserFinancialSystem(systemId: number, emailUser: string, financialSystem: FinancialSystem) {
-    return this.httpClient.post<any>(`${this.baseURL}/AddUserFinancialSystem?systemId=${systemId}&emailUser=${emailUser}`, financialSystem)
+  AddUserFinancialSystem(systemId: number, emailUser: string) {
+    return this.httpClient.post<any>(`${this.baseURL}/AddUserFinancialSystem?systemId=${systemId}&emailUser=${emailUser}`, null)
   }
 }

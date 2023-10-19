@@ -39,11 +39,11 @@ namespace WebApi.Controllers
         /// </summary>
         /// <param name="systemId">The system id.</param>
         /// <returns><![CDATA[Task<object>]]></returns>
-        [HttpGet("api/GetAllUserFinancialSystemAsync")]
+        [HttpGet("/api/UserFinancialSystem")]
         [Produces("application/json")]
-        public async Task<object> GetAllUserFinancialSystemAsync(int systemId)
+        public async Task<object> UserFinancialSystem(int systemId)
         {
-            return await _iUserFinancialSystem.GetAllUserFinancialSystemAsync(systemId);
+            return await _iUserFinancialSystem.UserFinancialSystem(systemId);
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace WebApi.Controllers
         /// <param name="systemId">The system id.</param>
         /// <param name="emailUser">The email user.</param>
         /// <returns><![CDATA[Task<object>]]></returns>
-        [HttpPost("api/AddUserFinancialSystem")]
+        [HttpPost("/api/AddUserFinancialSystem")]
         [Produces("application/json")]
         public async Task<object> AddUserFinancialSystem(int systemId, string emailUser)
         {
@@ -80,7 +80,7 @@ namespace WebApi.Controllers
         /// </summary>
         /// <param name="id">The id.</param>
         /// <returns><![CDATA[Task<object>]]></returns>
-        [HttpPost("api/DeleteUserFinancialSystem")]
+        [HttpPost("/api/DeleteUserFinancialSystem")]
         [Produces("application/json")]
         public async Task<object> DeleteUserFinancialSystem(int id)
         {

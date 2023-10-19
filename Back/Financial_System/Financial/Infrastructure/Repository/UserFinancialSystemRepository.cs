@@ -30,7 +30,7 @@ namespace Infrastructure.Repository
         /// </summary>
         /// <param name="systemId">The system id.</param>
         /// <returns><![CDATA[Task<IList<UserFinancialSystem>>]]></returns>
-        public async Task<IList<UserFinancialSystem>> GetAllUserFinancialSystemAsync(int systemId)
+        public async Task<IList<UserFinancialSystem>> UserFinancialSystem(int systemId)
         {
             using var banco = new ContextBase(_contextBase);
             return await banco.UserFinancialSystem.Where(s => s.SystemId == systemId)
