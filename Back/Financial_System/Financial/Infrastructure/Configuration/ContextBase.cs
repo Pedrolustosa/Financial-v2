@@ -61,6 +61,6 @@ namespace Infrastructure.Configuration
         /// Gets the connection string.
         /// </summary>
         /// <returns>A string.</returns>
-        public static string ConnectionString => "Data Source=LAPTOP-3D5G6G45;Initial Catalog=FinancialDB;Integrated Security=true;";
+        public static string ConnectionString => "Server=LAPTOP-3D5G6G45;Database=FinancialDB;Integrated Security=true;TrustServerCertificate=True";
     }
 }

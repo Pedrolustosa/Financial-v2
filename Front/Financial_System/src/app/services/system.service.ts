@@ -8,7 +8,7 @@ import { FinancialSystem } from '../models/FinancialSystem';
 })
 
 export class SystemService {
-  private readonly baseURL = environment["endPoint"];
+  private readonly baseURL = environment.endPoint;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -20,7 +20,7 @@ export class SystemService {
     return this.httpClient.get(`${this.baseURL}/GetAllUserFinancialSystemUser?emailUser=${emailUser}`);
   }
 
-  AddUserFinancialSystem(systemId: number, emailUser: string) {
-    return this.httpClient.post<any>(`${this.baseURL}/AddUserFinancialSystem?systemId=${systemId}&emailUser=${emailUser}`, null)
+  AddUserFinancialSystem(systemId: number, emailUser: string, financialSystem: FinancialSystem) {
+    return this.httpClient.post<any>(`${this.baseURL}/AddUserFinancialSystem?systemId=${systemId}&emailUser=${emailUser}`, financialSystem)
   }
 }

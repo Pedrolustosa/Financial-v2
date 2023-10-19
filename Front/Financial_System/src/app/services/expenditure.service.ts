@@ -8,7 +8,7 @@ import { Expenditure } from '../models/Expenditure';
 })
 
 export class ExpenditureService {
-  private readonly baseURL = environment["endPoint"];
+  private readonly baseURL = environment.endPoint;
 
   constructor(private httpClient: HttpClient) { }
 

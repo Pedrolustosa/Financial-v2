@@ -22,7 +22,6 @@ export class SystemComponent {
   dataForm() { return this.systemForm.controls; }
 
   send() {
-    debugger
     var dados = this.dataForm();
     let item = new FinancialSystem();
     item.Name = dados["name"].value;
@@ -35,12 +34,15 @@ export class SystemComponent {
     item.YearCopy = 0;
 
     this.systemService.AddFinancialSystem(item).subscribe((response: FinancialSystem) => {
+      console.log("response:", response.Id);
       this.systemForm.reset();
-      this.systemService.AddUserFinancialSystem(response.Id, "test@test.com").subscribe((response: any) => {
-        debugger
-      }, (error) => console.error(error),
-        () => { })
-    }, (error) => console.error(error),
-      () => { })
+      this.systemService.AddUserFinancialSystem(response.Id, "test@test.com", response).subscribe(
+        (response: any) => {
+          debugger;
+        },
+        (error) => console.error(error)
+      );
+    },
+      (error) => console.error(error));
   }
 }
