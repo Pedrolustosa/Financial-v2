@@ -10,7 +10,7 @@ namespace WebApi.Controllers
     /// The financial system controller.
     /// </summary>
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     [ApiController]
     public class FinancialSystemController : ControllerBase
     {
@@ -82,7 +82,7 @@ namespace WebApi.Controllers
         public async Task<object> UpdateFinancialSystem(FinancialSystem financialSystem)
         {
             await _iFinancialSystemService.UpdateFinancialSystem(financialSystem);
-            return Task.FromResult(financialSystem);
+            return financialSystem;
         }
 
         /// <summary>

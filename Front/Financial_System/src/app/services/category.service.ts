@@ -8,7 +8,7 @@ import { Category } from '../models/Category';
 })
 
 export class CategoryService {
-  private readonly baseURL = environment["endPoint"];
+  private readonly baseURL = environment.endPoint;
 
   constructor(private httpClient: HttpClient) { }
 

@@ -10,7 +10,7 @@ namespace WebApi.Controllers
     /// The user financial system controller.
     /// </summary>
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     [ApiController]
     public class UserFinancialSystemController : ControllerBase
     {
@@ -40,7 +40,7 @@ namespace WebApi.Controllers
         /// <param name="systemId">The system id.</param>
         /// <returns><![CDATA[Task<object>]]></returns>
         [HttpGet("api/GetAllUserFinancialSystemAsync")]
-        [Produces("applicarion/json")]
+        [Produces("application/json")]
         public async Task<object> GetAllUserFinancialSystemAsync(int systemId)
         {
             return await _iUserFinancialSystem.GetAllUserFinancialSystemAsync(systemId);
@@ -53,7 +53,7 @@ namespace WebApi.Controllers
         /// <param name="emailUser">The email user.</param>
         /// <returns><![CDATA[Task<object>]]></returns>
         [HttpPost("api/AddUserFinancialSystem")]
-        [Produces("applicarion/json")]
+        [Produces("application/json")]
         public async Task<object> AddUserFinancialSystem(int systemId, string emailUser)
         {
             try
@@ -61,17 +61,18 @@ namespace WebApi.Controllers
                 await _iUserFinancialSystemService.AddUserFinancialSystem(
                     new UserFinancialSystem
                     {
-                        Id = systemId,
+                        SystemId = systemId,
                         UserEmail = emailUser,
                         Administrator = false,
                         CurrentSystem = true
                     });
+
             }
             catch (Exception)
             {
                 return Task.FromResult(false);
             }
-            return Task.FromResult(true);
+            return Ok();
         }
 
         /// <summary>
@@ -80,7 +81,7 @@ namespace WebApi.Controllers
         /// <param name="id">The id.</param>
         /// <returns><![CDATA[Task<object>]]></returns>
         [HttpPost("api/DeleteUserFinancialSystem")]
-        [Produces("applicarion/json")]
+        [Produces("application/json")]
         public async Task<object> DeleteUserFinancialSystem(int id)
         {
             try

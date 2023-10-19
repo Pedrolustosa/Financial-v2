@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Entities.Notifications
 {
@@ -19,18 +20,21 @@ namespace Entities.Notifications
         /// Gets or Sets the name propierty.
         /// </summary>
         [NotMapped]
+        [JsonIgnore]
         public string? NamePropierty { get; set; }
 
         /// <summary>
         /// Gets or Sets the message.
         /// </summary>
         [NotMapped]
+        [JsonIgnore]
         public string? Message { get; set; }
 
         /// <summary>
         /// Gets or Sets the notifications.
         /// </summary>
         [NotMapped]
+        [JsonIgnore]
         public List<Notify> Notifications { get; set; }
 
         /// <summary>
