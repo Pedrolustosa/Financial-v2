@@ -33,16 +33,13 @@ export class SystemComponent {
     item.MonthCopy = 0;
     item.YearCopy = 0;
 
-    this.systemService.AddFinancialSystem(item).subscribe((response: FinancialSystem) => {
-      console.log("response:", response.Id);
+    this.systemService.AddFinancialSystem(item).subscribe((response: FinancialSystem | any) => {
       this.systemForm.reset();
-      this.systemService.AddUserFinancialSystem(response.Id, "test@test.com", response).subscribe(
-        (response: any) => {
-          debugger;
-        },
-        (error) => console.error(error)
-      );
+      this.systemService.AddUserFinancialSystem(response.id, "test@test.com").subscribe((response: any) => { },
+        (error) => console.error(error),
+        () => { })
     },
-      (error) => console.error(error));
+      (error) => console.error(error),
+      () => { })
   }
 }
