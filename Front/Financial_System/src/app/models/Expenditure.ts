@@ -9,6 +9,7 @@ export class Expenditure {
   DateChange: Date | any;
   PaymentDate: Date | any;
   ExpiredDate: Date | any;
+  DueDate: Date | any
   Paid: boolean | any;
   DelayedExpense: boolean | any;
   CategoryId: number | any;
