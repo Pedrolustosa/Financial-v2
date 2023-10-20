@@ -5,46 +5,38 @@
   <div class="content-page">
     <div class="card-header">
       <div class="card-title">
-        Expense Register
+        Cadastro de Despesas
       </div>
     </div>
     <form class="form-page" [formGroup]="expenditureForm" (submit)="send()">
       <div class="row">
         <div class="group-row">
-          <label>Name</label>
-          <input type="text" name="name" id="name" placeholder="Name" formControlName="name" required />
+          <label>Nome</label>
+          <input type="text" name="name" id="name" placeholder="Nome" formControlName="name" required />
           <label class="error-input" *ngIf="expenditureForm.get('name')?.errors?.['required'] &&
-                  expenditureForm.get('name')?.touched">
-            Required field!
+                    expenditureForm.get('name')?.touched">
+            Required Field!
           </label>
         </div>
       </div>
       <div class="row">
         <div class="group-row">
-          <label>Value</label>
-          <input type="number" name="value" id="value" placeholder="Value" formControlName="value" required />
-          <label class="error-input" *ngIf="expenditureForm.get('value')?.errors?.['required'] &&
-                  expenditureForm.get('value')?.touched">
-            Required field!
+          <label>Paid</label>
+          <input type="number" name="paid" id="paid" placeholder="paid" formControlName="paid" required />
+          <label class="error-input" *ngIf="expenditureForm.get('paid')?.errors?.['required'] &&
+                    expenditureForm.get('paid')?.touched">
+            Required Field!
           </label>
         </div>
       </div>
       <div class="row">
         <div class="group-row">
-          <label>Due date</label>
-          <input type="date" name="date" id="date" placeholder="Date" formControlName="date" required />
-          <label class="error-input" *ngIf="expenditureForm.get('date')?.errors?.['required'] &&
-                  expenditureForm.get('date')?.touched">
-            Required field!
+          <label>Due Date</label>
+          <input type="date" name="dueDate" id="dueDate" placeholder="dueDate" formControlName="dueDate" required />
+          <label class="error-input" *ngIf="expenditureForm.get('dueDate')?.errors?.['required'] &&
+                    expenditureForm.get('dueDate')?.touched">
+            Required Field!
           </label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="group-row">
-          <label>System</label>
-          <ng-select class="select-standard" formControlName="selectSystem" [(ngModel)]="selectSystem"
-            [items]="systemList" bindLabel="name" [multiple]="false" [clearable]="false"
-            [searchable]="false"></ng-select>
         </div>
       </div>
       <div class="row">
@@ -57,7 +49,15 @@
       </div>
       <div class="row">
         <div class="group-row">
-          <input type="submit" value="Save" class="btn-primary" />
+          <mat-slide-toggle class="group-slide" [color]="color" [checked]="checked" [disabled]="disabled"
+            (change)="handleChangePago($event)">
+            Paid?
+          </mat-slide-toggle>
+        </div>
+      </div>
+      <div class="row">
+        <div class="group-row">
+          <input type="submit" value="Salvar" class="btn-primary" />
         </div>
       </div>
     </form>
