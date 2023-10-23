@@ -12,7 +12,7 @@ export class CategoryService {
 
   constructor(private httpClient: HttpClient) { }
 
-  GetAllCategoriesUser(emailUser: string) {
+  ListCategoriesUser(emailUser: string) {
     return this.httpClient.get(`${this.baseURL}/ListCategoriesUser?emailUser=${emailUser}`);
   }
 
