@@ -13,6 +13,6 @@ namespace Domain.Interfaces.ICategory
         /// </summary>
         /// <param name="emailUser">The email user.</param>
         /// <returns><![CDATA[Task<IList<Category>>]]></returns>
-        Task<IList<Category>> GetAllCategoriesUserAsync(string emailUser);
+        Task<IList<Category>> ListCategoriesUser(string emailUser);
     }
 }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FinancialSystem } from 'src/app/models/FinancialSystem';
+import { SelectModel } from 'src/app/models/SelectModel';
+import { AuthService } from 'src/app/services/auth.service';
 import { MenuService } from 'src/app/services/menu.service';
 import { SystemService } from 'src/app/services/system.service';
 
@@ -11,8 +13,9 @@ import { SystemService } from 'src/app/services/system.service';
 })
 export class SystemComponent {
   systemForm: FormGroup | any;
+  systemSelect = new SelectModel();
 
-  constructor(public menuService: MenuService, public formBuilder: FormBuilder, public systemService: SystemService) { }
+  constructor(public menuService: MenuService, public formBuilder: FormBuilder, public systemService: SystemService, public authService: AuthService) { }
 
   ngOnInit() {
     this.menuService.selectedMenu = 2;
@@ -35,7 +38,7 @@ export class SystemComponent {
 
     this.systemService.AddFinancialSystem(item).subscribe((response: FinancialSystem | any) => {
       this.systemForm.reset();
-      this.systemService.AddUserFinancialSystem(response.id, "test@test.com").subscribe((response: any) => { },
+      this.systemService.AddUserFinancialSystem(response.id, this.authService.getEmailUser()).subscribe((response: any) => { },
         (error) => console.error(error),
         () => { })
     },

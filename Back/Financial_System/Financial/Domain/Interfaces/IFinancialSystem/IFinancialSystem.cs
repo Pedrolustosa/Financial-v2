@@ -13,6 +13,6 @@ namespace Domain.Interfaces.IFinancialSystem
         /// </summary>
         /// <param name="emailUser">The email user.</param>
         /// <returns><![CDATA[Task<IList<FinancialSystem>>]]></returns>
-        Task<IList<FinancialSystem>> GetAllUserFinancialSystem(string emailUser);
+        Task<IList<FinancialSystem>> ListSystemsUser(string emailUser);
     }
 }

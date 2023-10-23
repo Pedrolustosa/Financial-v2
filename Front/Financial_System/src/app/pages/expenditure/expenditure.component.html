@@ -12,7 +12,7 @@
       <div class="row">
         <div class="group-row">
           <label>Nome</label>
-          <input type="text" name="name" id="name" placeholder="Nome" formControlName="name" required />
+          <input type="text" name="name" id="name" placeholder="Name" formControlName="name" required />
           <label class="error-input" *ngIf="expenditureForm.get('name')?.errors?.['required'] &&
                     expenditureForm.get('name')?.touched">
             Required Field!
@@ -21,10 +21,10 @@
       </div>
       <div class="row">
         <div class="group-row">
-          <label>Paid</label>
-          <input type="number" name="paid" id="paid" placeholder="paid" formControlName="paid" required />
-          <label class="error-input" *ngIf="expenditureForm.get('paid')?.errors?.['required'] &&
-                    expenditureForm.get('paid')?.touched">
+          <label>Value</label>
+          <input type="number" name="value" id="value" placeholder="Value" formControlName="value" required />
+          <label class="error-input" *ngIf="expenditureForm.get('value')?.errors?.['required'] &&
+                    expenditureForm.get('value')?.touched">
             Required Field!
           </label>
         </div>
@@ -32,9 +32,9 @@
       <div class="row">
         <div class="group-row">
           <label>Due Date</label>
-          <input type="date" name="dueDate" id="dueDate" placeholder="dueDate" formControlName="dueDate" required />
-          <label class="error-input" *ngIf="expenditureForm.get('dueDate')?.errors?.['required'] &&
-                    expenditureForm.get('dueDate')?.touched">
+          <input type="date" name="date" id="date" placeholder="date" formControlName="date" required />
+          <label class="error-input" *ngIf="expenditureForm.get('date')?.errors?.['required'] &&
+                    expenditureForm.get('date')?.touched">
             Required Field!
           </label>
         </div>

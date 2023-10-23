@@ -40,11 +40,11 @@ namespace WebApi.Controllers
         /// </summary>
         /// <param name="emailUser">The email user.</param>
         /// <returns><![CDATA[Task<object>]]></returns>
-        [HttpGet("/api/GetAllUserFinancialSystemAsync")]
+        [HttpGet("/api/ListSystemsUser")]
         [Produces("application/json")]
-        public async Task<object> GetAllUserFinancialSystemUser(string emailUser)
+        public async Task<object> ListSystemsUser(string emailUser)
         {
-            return await _iFinancialSystem.GetAllUserFinancialSystem(emailUser);
+            return await _iFinancialSystem.ListSystemsUser(emailUser);
         }
 
         /// <summary>

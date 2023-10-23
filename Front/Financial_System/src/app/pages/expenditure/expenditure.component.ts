@@ -16,7 +16,6 @@ import { Expenditure } from 'src/app/models/Expenditure';
 })
 export class ExpenditureComponent {
   systemList = new Array<SelectModel>();
-  selectSystem = new SelectModel();
   categoryList = new Array<SelectModel>();
   selectCategory = new SelectModel();
   expenditureForm: FormGroup | any;
@@ -24,7 +23,7 @@ export class ExpenditureComponent {
   checked = false;
   disabled = false;
 
-  constructor(public menuService: MenuService, public formBuilder: FormBuilder, public systemService: SystemService, public authService: AuthService,
+  constructor(public menuService: MenuService, public formBuilder: FormBuilder, public authService: AuthService,
     public categoryService: CategoryService,
     public expenditureService: ExpenditureService) { }
 
@@ -35,9 +34,9 @@ export class ExpenditureComponent {
         name: ['', [Validators.required]],
         value: ['', [Validators.required]],
         date: ['', [Validators.required]],
-        selectSystem: ['', [Validators.required]],
         selectCategory: ['', [Validators.required]],
       })
+    this.GetAllCategoriesUser();
   }
 
   dataForm() {
@@ -48,35 +47,34 @@ export class ExpenditureComponent {
     this.checked = item.checked as boolean;
   }
 
-  ListarCategoriasUsuario() {
-    this.categoryService.GetAllCategoriesUser(this.authService.getEmailUser())
-      .subscribe((reponse: Array<Category> | any) => {
-        var listCategories: SelectModel[] = [];
-        reponse.forEach((x: { Id: { toString: () => string; }; Name: string; }) => {
-          var item = new SelectModel();
-          item.id = x.Id.toString();
-          item.name = x.Name;
-          listCategories.push(item);
-        });
-        this.categoryList = listCategories;
-      })
-  }
-
   send() {
-    debugger
     var data = this.dataForm();
     let item = new Expenditure();
     item.Id = 0;
     item.Name = data["name"].value;
     item.Value = data["value"].value;
     item.Paid = this.checked;
-    item.DueDate = data["dueDate"].value;
-    item.CategoryId = parseInt(this.selectCategory.id);
-
+    item.ExpiredDate = data["date"].value;
+    item.CategoryId = parseInt(this.selectCategory.id.toString());
     this.expenditureService.AddExpenditure(item)
       .subscribe((response: Expenditure) => {
         this.expenditureForm.reset();
       }, (error) => console.error(error),
         () => { })
+  }
+
+  GetAllCategoriesUser() {
+    this.categoryService.GetAllCategoriesUser(this.authService.getEmailUser())
+      .subscribe((response: Array<Category> | any) => {
+        var listaCatagorias: SelectModel[] = [];
+        response.forEach(function (x: { id: string; name: string; }) {
+          var item = new SelectModel();
+          item.id = x.id;
+          item.name = x.name;
+          listaCatagorias.push(item);
+        });
+        this.categoryList = listaCatagorias;
+        console.log("response: ", response);
+      })
   }
 }
