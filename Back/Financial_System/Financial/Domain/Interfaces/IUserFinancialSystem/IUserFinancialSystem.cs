@@ -13,7 +13,7 @@ namespace Domain.Interfaces.IUserFinancialSystem
         /// </summary>
         /// <param name="systemId">The system id.</param>
         /// <returns><![CDATA[Task<IList<UserFinancialSystem>>]]></returns>
-        Task<IList<UserFinancialSystem>> UserFinancialSystem(int systemId);
+        Task<IList<UserFinancialSystem>> ListSystemsUser(int systemId);
 
         /// <summary>
         /// Removers the user.

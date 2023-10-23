@@ -16,8 +16,8 @@ export class SystemService {
     return this.httpClient.post<FinancialSystem>(`${this.baseURL}/AddFinancialSystem`, financialSystem)
   }
 
-  UserFinancialSystem(emailUser: string) {
-    return this.httpClient.get(`${this.baseURL}/UserFinancialSystem?emailUser=${emailUser}`);
+  ListSystemsUser(emailUser: string) {
+    return this.httpClient.get(`${this.baseURL}/ListSystemsUser?emailUser=${emailUser}`);
   }
 
   AddUserFinancialSystem(systemId: number, emailUser: string) {

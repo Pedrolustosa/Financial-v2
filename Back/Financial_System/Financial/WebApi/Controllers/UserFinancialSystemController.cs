@@ -39,11 +39,11 @@ namespace WebApi.Controllers
         /// </summary>
         /// <param name="systemId">The system id.</param>
         /// <returns><![CDATA[Task<object>]]></returns>
-        [HttpGet("/api/UserFinancialSystem")]
+        [HttpGet("/api/ListSystemsUsers")]
         [Produces("application/json")]
-        public async Task<object> UserFinancialSystem(int systemId)
+        public async Task<object> ListSystemsUser(int systemId)
         {
-            return await _iUserFinancialSystem.UserFinancialSystem(systemId);
+            return await _iUserFinancialSystem.ListSystemsUser(systemId);
         }
 
         /// <summary>

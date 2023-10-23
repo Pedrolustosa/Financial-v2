@@ -29,7 +29,7 @@ namespace Infrastructure.Repository
         /// </summary>
         /// <param name="emailUser">The email user.</param>
         /// <returns><![CDATA[Task<IList<Category>>]]></returns>
-        public async Task<IList<Category>> GetAllCategoriesUserAsync(string emailUser)
+        public async Task<IList<Category>> ListCategoriesUser(string emailUser)
         {
             using var database = new ContextBase(_contextBase);
             return await (from s in database.FinancialSystem

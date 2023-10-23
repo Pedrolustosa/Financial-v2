@@ -37,11 +37,11 @@ namespace WebApi.Controllers
         /// </summary>
         /// <param name="userEmail">The user email.</param>
         /// <returns><![CDATA[Task<object>]]></returns>
-        [HttpGet("/api/GetAllCategoriesUser")]
+        [HttpGet("/api/ListCategoriesUser")]
         [Produces("application/json")]
-        public async Task<object> GetAllCategoriesUser(string userEmail)
+        public async Task<object> ListCategoriesUser(string userEmail)
         {
-            return await _iCategory.GetAllCategoriesUserAsync(userEmail);
+            return await _iCategory.ListCategoriesUser(userEmail);
         }
 
         /// <summary>
