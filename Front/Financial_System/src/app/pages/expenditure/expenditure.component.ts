@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SelectModel } from 'src/app/models/SelectModel';
 import { AuthService } from 'src/app/services/auth.service';
 import { MenuService } from 'src/app/services/menu.service';
-import { SystemService } from 'src/app/services/system.service';
 import { CategoryService } from './../../services/category.service';
 import { ExpenditureService } from './../../services/expenditure.service';
 import { Category } from 'src/app/models/Category';
@@ -15,7 +14,6 @@ import { Expenditure } from 'src/app/models/Expenditure';
   styleUrls: ['./expenditure.component.scss']
 })
 export class ExpenditureComponent {
-  systemList = new Array<SelectModel>();
   categoryList = new Array<SelectModel>();
   selectCategory = new SelectModel();
   expenditureForm: FormGroup | any;
@@ -36,7 +34,7 @@ export class ExpenditureComponent {
         date: ['', [Validators.required]],
         selectCategory: ['', [Validators.required]],
       })
-    this.GetAllCategoriesUser();
+    this.ListCategoriesUser();
   }
 
   dataForm() {
@@ -63,8 +61,8 @@ export class ExpenditureComponent {
         () => { })
   }
 
-  GetAllCategoriesUser() {
-    this.categoryService.GetAllCategoriesUser(this.authService.getEmailUser())
+  ListCategoriesUser() {
+    this.categoryService.ListCategoriesUser(this.authService.getEmailUser())
       .subscribe((response: Array<Category> | any) => {
         var listaCatagorias: SelectModel[] = [];
         response.forEach(function (x: { id: string; name: string; }) {
