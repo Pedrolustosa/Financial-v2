@@ -33,7 +33,7 @@ export class ExpenditureComponent {
         value: ['', [Validators.required]],
         date: ['', [Validators.required]],
         selectCategory: ['', [Validators.required]],
-      })
+      });
     this.ListCategoriesUser();
   }
 
@@ -57,22 +57,24 @@ export class ExpenditureComponent {
     this.expenditureService.AddExpenditure(item)
       .subscribe((response: Expenditure) => {
         this.expenditureForm.reset();
-      }, (error) => console.error(error),
-        () => { })
+      },
+      (error) => console.error("Error:", error),
+      () => { })
   }
 
   ListCategoriesUser() {
-    this.categoryService.ListCategoriesUser(this.authService.getEmailUser())
-      .subscribe((response: Array<Category> | any) => {
-        var listaCatagorias: SelectModel[] = [];
-        response.forEach(function (x: { id: string; name: string; }) {
-          var item = new SelectModel();
-          item.id = x.id;
-          item.name = x.name;
-          listaCatagorias.push(item);
-        });
-        this.categoryList = listaCatagorias;
-        console.log("response: ", response);
-      })
+    this.categoryService.ListCategoriesUser(this.authService.getUserEmail()).subscribe((response: Array<Category> | any) => {
+      var listaCatagorias: SelectModel[] = [];
+      response.forEach(function (x: { id: string; name: string; }) {
+        var item = new SelectModel();
+        item.id = x.id;
+        item.name = x.name;
+        listaCatagorias.push(item);
+      });
+      this.categoryList = listaCatagorias;
+    },
+    (error) => {
+      console.error("Error:", error);
+    })
   }
 }

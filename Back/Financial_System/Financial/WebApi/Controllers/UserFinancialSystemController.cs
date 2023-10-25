@@ -50,11 +50,11 @@ namespace WebApi.Controllers
         /// Add user financial system.
         /// </summary>
         /// <param name="systemId">The system id.</param>
-        /// <param name="emailUser">The email user.</param>
+        /// <param name="userEmail">The email user.</param>
         /// <returns><![CDATA[Task<object>]]></returns>
         [HttpPost("/api/AddUserFinancialSystem")]
         [Produces("application/json")]
-        public async Task<object> AddUserFinancialSystem(int systemId, string emailUser)
+        public async Task<object> AddUserFinancialSystem(int systemId, string userEmail)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace WebApi.Controllers
                     new UserFinancialSystem
                     {
                         SystemId = systemId,
-                        UserEmail = emailUser,
+                        UserEmail = userEmail,
                         Administrator = false,
                         CurrentSystem = true
                     });

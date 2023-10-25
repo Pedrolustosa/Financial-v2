@@ -38,13 +38,13 @@ namespace WebApi.Controllers
         /// <summary>
         /// Gets the all financial system user.
         /// </summary>
-        /// <param name="emailUser">The email user.</param>
+        /// <param name="userEmail">The email user.</param>
         /// <returns><![CDATA[Task<object>]]></returns>
         [HttpGet("/api/ListSystemsUser")]
         [Produces("application/json")]
-        public async Task<object> ListSystemsUser(string emailUser)
+        public async Task<object> ListSystemsUser(string userEmail)
         {
-            return await _iFinancialSystem.ListSystemsUser(emailUser);
+            return await _iFinancialSystem.ListSystemsUser(userEmail);
         }
 
         /// <summary>

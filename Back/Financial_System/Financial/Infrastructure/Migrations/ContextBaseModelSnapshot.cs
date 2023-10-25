@@ -108,8 +108,6 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SystemId");
-
                     b.ToTable("Category");
                 });
 
@@ -159,8 +157,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
 
                     b.ToTable("Dispense");
                 });
@@ -362,28 +358,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("Entities.Entities.Category", b =>
-                {
-                    b.HasOne("Entities.Entities.FinancialSystem", "FinancialSystem")
-                        .WithMany()
-                        .HasForeignKey("SystemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("FinancialSystem");
-                });
-
-            modelBuilder.Entity("Entities.Entities.Expenditure", b =>
-                {
-                    b.HasOne("Entities.Entities.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("Entities.Entities.UserFinancialSystem", b =>
