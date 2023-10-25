@@ -38,7 +38,7 @@ export class SystemComponent {
 
     this.systemService.AddFinancialSystem(item).subscribe((response: FinancialSystem | any) => {
       this.systemForm.reset();
-      this.systemService.AddUserFinancialSystem(response.id, this.authService.getEmailUser()).subscribe((response: any) => { },
+      this.systemService.AddUserFinancialSystem(response.id, this.authService.getUserEmail()).subscribe((response: any) => { },
         (error) => console.error(error),
         () => { })
     },

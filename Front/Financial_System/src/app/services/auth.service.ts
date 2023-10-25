@@ -49,14 +49,14 @@ export class AuthService {
     sessionStorage.clear();
   }
 
-  setEmailUser(email: string) {
-    localStorage.setItem('emailUser', email);
+  setUserEmail(email: string) {
+    localStorage.setItem('userEmail', email);
   }
 
-  getEmailUser() {
-    var emailUserLogado = localStorage.getItem('emailUser');
-    if (emailUserLogado) {
-      return emailUserLogado;
+  getUserEmail() {
+    var userEmailLogado = localStorage.getItem('userEmail');
+    if (userEmailLogado) {
+      return userEmailLogado;
     }
     else {
       this.ClearDataUser();

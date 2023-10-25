@@ -42,7 +42,7 @@ export class CategoryComponent {
   }
 
   ListSystemsUser() {
-    this.systemService.ListSystemsUser(this.authService.getEmailUser())
+    this.systemService.ListSystemsUser(this.authService.getUserEmail())
       .subscribe((response: Array<FinancialSystem> | any) => {
         var lisSistemaFinanceiro: SelectModel[] = [];
         response.forEach(function (x: { id: string; name: string; }) {

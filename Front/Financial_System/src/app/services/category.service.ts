@@ -13,7 +13,7 @@ export class CategoryService {
   constructor(private httpClient: HttpClient) { }
 
   ListCategoriesUser(emailUser: string) {
-    return this.httpClient.get(`${this.baseURL}/ListCategoriesUser?emailUser=${emailUser}`);
+    return this.httpClient.get(`${this.baseURL}/ListCategoriesUser?userEmail=${emailUser}`);
   }
 
   AddCategory(category: Category) {
