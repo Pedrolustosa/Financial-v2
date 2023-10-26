@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SystemComponent } from './system.component';
+import { CommonModule } from '@angular/common';
 
 const routes: Routes = [{
   path: '',
@@ -8,8 +9,8 @@ const routes: Routes = [{
 }];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forChild(routes), CommonModule],
+  exports: [RouterModule],
 })
 
 export class SystemRoutingModule { }

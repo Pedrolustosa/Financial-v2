@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +9,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AuthGuard } from './pages/guards/auth-guard.service';
 import { HTTPStatus, LoaderInterceptor } from './interceptor/loader.interceptor';
+import { SystemModule } from './pages/system/system.module';
+
 const RxJS = [LoaderInterceptor, HTTPStatus];
 
 @NgModule({
@@ -19,11 +21,10 @@ const RxJS = [LoaderInterceptor, HTTPStatus];
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CommonModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
   ],
   providers: [
     AuthGuard,
@@ -34,7 +35,6 @@ const RxJS = [LoaderInterceptor, HTTPStatus];
   exports:
     [
       CommonModule
-    ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    ]
 })
 export class AppModule { }
