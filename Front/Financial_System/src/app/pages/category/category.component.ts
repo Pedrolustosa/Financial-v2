@@ -17,13 +17,74 @@ export class CategoryComponent {
   systemList = new Array<SelectModel>();
   systemSelect = new SelectModel();
   categoryForm: FormGroup | any;
+  typeScreen: number = 1;
+  tableListCategory: Array<Category> | any;
+  id: string | any;
+  page: number = 1;
+  config: any;
+  pagination: boolean = true;
+  itemsPerPage: number = 10;
 
-  constructor(public menuService: MenuService, public formBuilder: FormBuilder, public systemService: SystemService, public authService: AuthService, public categoryService: CategoryService) { }
+  constructor(
+    public menuService: MenuService,
+    public formBuilder: FormBuilder,
+    public systemService: SystemService,
+    public authService: AuthService,
+    public categoryService: CategoryService
+  ) { }
+
+  configPag() {
+    this.id = this.generateIdForPagingConfig();
+    this.config = {
+      id: this.id,
+      currentPage: this.page,
+      itemsPerPage: this.itemsPerPage
+    };
+  }
+
+  generateIdForPagingConfig() {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < 10; i++) {
+      result += characters.charAt(Math.floor(Math.random() *
+        charactersLength));
+    }
+    return result;
+  }
+
+  register() {
+    this.typeScreen = 2;
+    this.categoryForm.reset();
+  }
+
+  changeItemsPerPage() {
+    this.page = 1
+    this.config.currentPage = this.page;
+    this.config.itemsPerPage = this.itemsPerPage;
+  }
+
+  changePage(event: any) {
+    this.page = event;
+    this.config.currentPage = this.page;
+  }
+
+  listCategoriesUser() {
+    this.typeScreen = 1;
+    this.categoryService.ListCategoriesUser(this.authService.getUserEmail())
+      .subscribe((response: Array<Category> | any) => {
+        this.tableListCategory = response;
+      }, (error) => console.error(error),
+        () => { })
+  }
+
 
   ngOnInit() {
     this.menuService.selectedMenu = 3;
+    this.configPag();
+    this.listCategoriesUser();
     this.categoryForm = this.formBuilder.group({ name: ['', [Validators.required]], systemSelect: ['', [Validators.required]], })
-    this.ListSystemsUser();
+    this.listSystemsUser();
   }
 
   dataForm() { return this.categoryForm.controls; }
@@ -41,7 +102,7 @@ export class CategoryComponent {
         () => { })
   }
 
-  ListSystemsUser() {
+  listSystemsUser() {
     this.systemService.ListSystemsUser(this.authService.getUserEmail())
       .subscribe((response: Array<FinancialSystem> | any) => {
         var lisSistemaFinanceiro: SelectModel[] = [];

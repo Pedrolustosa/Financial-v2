@@ -17,16 +17,74 @@ export class ExpenditureComponent {
   categoryList = new Array<SelectModel>();
   selectCategory = new SelectModel();
   expenditureForm: FormGroup | any;
+  typeScreen: number = 1;
+  tableListExpenditure: Array<Expenditure> | any;
+  id: string | any;
+  page: number = 1;
+  config: any;
+  pagination: boolean = true;
+  itemsPerPage: number = 10;
   color = 'accent';
   checked = false;
   disabled = false;
 
-  constructor(public menuService: MenuService, public formBuilder: FormBuilder, public authService: AuthService,
+  configPag() {
+    this.id = this.generateIdForPagingConfig();
+    this.config = {
+      id: this.id,
+      currentPage: this.page,
+      itemsPerPage: this.itemsPerPage
+    };
+  }
+
+  generateIdForPagingConfig() {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < 10; i++) {
+      result += characters.charAt(Math.floor(Math.random() *
+        charactersLength));
+    }
+    return result;
+  }
+
+  register() {
+    this.typeScreen = 2;
+    this.expenditureForm.reset();
+  }
+
+  changeItemsPerPage() {
+    this.page = 1
+    this.config.currentPage = this.page;
+    this.config.itemsPerPage = this.itemsPerPage;
+  }
+
+  changePage(event: any) {
+    this.page = event;
+    this.config.currentPage = this.page;
+  }
+
+  listExpenditureUser() {
+    this.typeScreen = 1;
+    this.expenditureService.ListExpensesUser(this.authService.getUserEmail())
+      .subscribe((response: Array<Category> | any) => {
+        this.tableListExpenditure = response;
+      }, (error) => console.error(error),
+        () => { })
+  }
+
+  constructor(
+    public menuService: MenuService,
+    public formBuilder: FormBuilder,
+    public authService: AuthService,
     public categoryService: CategoryService,
-    public expenditureService: ExpenditureService) { }
+    public expenditureService: ExpenditureService
+  ) { }
 
   ngOnInit() {
     this.menuService.selectedMenu = 4;
+    this.configPag();
+    this.listExpenditureUser();
     this.expenditureForm = this.formBuilder.group
       ({
         name: ['', [Validators.required]],
@@ -58,8 +116,8 @@ export class ExpenditureComponent {
       .subscribe((response: Expenditure) => {
         this.expenditureForm.reset();
       },
-      (error) => console.error("Error:", error),
-      () => { })
+        (error) => console.error("Error:", error),
+        () => { })
   }
 
   ListCategoriesUser() {
@@ -73,8 +131,8 @@ export class ExpenditureComponent {
       });
       this.categoryList = listaCatagorias;
     },
-    (error) => {
-      console.error("Error:", error);
-    })
+      (error) => {
+        console.error("Error:", error);
+      })
   }
 }

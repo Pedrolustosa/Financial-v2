@@ -37,11 +37,11 @@ namespace WebApi.Controllers
         /// </summary>
         /// <param name="userEmail">The user email.</param>
         /// <returns><![CDATA[Task<object>]]></returns>
-        [HttpGet("/api/GetAllExpendituresUser")]
+        [HttpGet("/api/ListExpensesUser")]
         [Produces("application/json")]
-        public async Task<object> GetAllExpendituresUser(string userEmail)
+        public async Task<object> ListExpensesUser(string userEmail)
         {
-            return await _iExpenditure.GetAllExpenditureUserAsync(userEmail);
+            return await _iExpenditure.ListExpensesUser(userEmail);
         }
 
         /// <summary>
