@@ -13,7 +13,7 @@ namespace Domain.Interfaces.IExpenditure
         /// </summary>
         /// <param name="emailUser">The email user.</param>
         /// <returns><![CDATA[Task<IList<Expenditure>>]]></returns>
-        Task<IList<Expenditure>> GetAllExpenditureUserAsync(string emailUser);
+        Task<IList<Expenditure>> ListExpensesUser(string emailUser);
 
         /// <summary>
         /// Gets the all expenditure user not paid before month asynchronously.

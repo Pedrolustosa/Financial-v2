@@ -12,6 +12,10 @@ export class ExpenditureService {
 
   constructor(private httpClient: HttpClient) { }
 
+  ListExpensesUser(userEmail: string) {
+    return this.httpClient.get(`${this.baseURL}/ListExpensesUser?userEmail=${userEmail}`);
+  }
+
   AddExpenditure(expenditure: Expenditure) {
     return this.httpClient.post<Expenditure>(`${this.baseURL}/AddExpenditure`, expenditure)
   }

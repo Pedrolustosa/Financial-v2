@@ -1,12 +1,11 @@
 <navbar></navbar>
 <sidebar></sidebar>
 
-<div class="container-base">
+<div *ngIf="typeScreen == 2" class="container-base">
   <div class="content-page">
     <div class="card-header">
-      <div class="card-title">
-        Category Registration
-      </div>
+      <div class="card-title"> Category Registration </div>
+      <div (click)="listCategoriesUser()" class="card-title-sub"> Category Listing </div>
     </div>
     <form class="form-page" [formGroup]="categoryForm" (submit)="send()">
       <div class="row">
@@ -14,16 +13,16 @@
           <label>Name</label>
           <input type="text" name="name" id="name" placeholder="Name" formControlName="name" required />
           <label class="error-input" *ngIf="categoryForm.get('name')?.errors?.['required'] &&
-                  categoryForm.get('name')?.touched">
-            Required field!
+                    categoryForm.get('name')?.touched">
+            Required Field!
           </label>
         </div>
       </div>
       <div class="row">
         <div class="group-row">
-          <label>System</label>
+          <label>Sistemas</label>
           <ng-select class="select-standard" [(ngModel)]="systemSelect" [items]="systemList" bindLabel="name"
-            [multiple]="false" [clearable]="false" [searchable]="false" formControlName="systemSelect" ></ng-select>
+            [multiple]="false" [clearable]="false" [searchable]="false" formControlName="systemSelect"></ng-select>
         </div>
       </div>
       <div class="row">
@@ -32,5 +31,47 @@
         </div>
       </div>
     </form>
+  </div>
+</div>
+
+<div *ngIf="typeScreen == 1" class="container-base">
+  <div class="content-page">
+    <div class="header-info-2">
+      <div class="card-header">
+        <div class="card-title"> Category Listing </div>
+        <div (click)="register()" class="card-title-sub"> Category Registration </div>
+      </div>
+      <table cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <td>Code</td>
+            <td>Name</td>
+            <td>Action</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="select-item" *ngFor="let item of tableListCategory | paginate: config; let i = index"
+            class="row-table" [ngClass]="{'grey-row' : i % 2 == 0, 'white-row' : i % 2 !== 0}">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>Edit</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="table-footer" *ngIf="pagination && tableListCategory">
+        <label class="show">Show</label>
+        <ng-select (change)="changeItemsPerPage()" [(ngModel)]="itemsPerPage" [clearable]="false" [searchable]="false"
+          class="show-drop">
+          <ng-option [value]="10">10</ng-option>
+          <ng-option [value]="50">50</ng-option>
+          <ng-option [value]="100">100</ng-option>
+        </ng-select>
+        <div class="container-pagination">
+          <pagination-controls id="{{this.id}}" previousLabel="Previous" nextLabel="Next" [responsive]="true"
+            (pageChange)="changePage($event)">
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

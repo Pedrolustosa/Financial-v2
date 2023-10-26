@@ -48,7 +48,7 @@ namespace Domain.Services
         /// <returns><![CDATA[Task<object>]]></returns>
         public async Task<object> LoadChart(string emailUser)
         {
-            var expenditureUser = await _iExpenditure.GetAllExpenditureUserAsync(emailUser);
+            var expenditureUser = await _iExpenditure.ListExpensesUser(emailUser);
             var expenditureBefore = await _iExpenditure.GetAllExpenditureUserNotPaidBeforeMonthAsync(emailUser);
             var expenditureNotPaidMonthBefore = expenditureBefore.Any() ? 
                                                 expenditureBefore.AsEnumerable().Sum(x => x.Value) : 

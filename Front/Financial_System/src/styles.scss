@@ -6,6 +6,8 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
+$color: #4caf50;
+
 body {
   font-family: "Poppins";
   margin: 0;
@@ -71,6 +73,20 @@ input {
         padding: 16px;
         font-size: 16px;
         font-weight: 500;
+      }
+
+      .card-title-sub {
+        color: #fff;
+        padding: 16px;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .card-title-sub:hover {
+        cursor: pointer;
+        background-color: darken($color, 15%);
+        transition: all .3s;
+        border-radius: 10rem;
       }
     }
 
