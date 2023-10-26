@@ -1,11 +1,14 @@
 <navbar></navbar>
 <sidebar></sidebar>
 
-<div class="container-base">
+<div *ngIf="typeScreen == 2" class="container-base">
   <div class="content-page">
     <div class="card-header">
-      <div class="card-title">
-        Systems Registration
+      <div class="header-info-2">
+        <div class="card-header">
+          <div class="card-title"> System registration </div>
+          <div (click)="ListSystemsUser()" class="card-title"> System listing </div>
+        </div>
       </div>
     </div>
     <form class="form-page" [formGroup]="systemForm" (submit)="send()">
@@ -25,5 +28,47 @@
         </div>
       </div>
     </form>
+  </div>
+</div>
+
+<div *ngIf="typeScreen == 1" class="container-base">
+  <div class="content-page">
+    <div class="header-info-2">
+      <div class="card-header">
+        <div class="card-title"> System listing </div>
+        <div (click)="register()" class="card-title"> System registration </div>
+      </div>
+      <table cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <td>Code</td>
+            <td>Name</td>
+            <td>Action</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="select-item" *ngFor="let item of tableListSystem | paginate: config; let i = index"
+            class="row-table" [ngClass]="{'row-grey' : i % 2 == 0, 'white-row' : i % 2 !== 0}">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>Edit</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="table-footer" *ngIf="pagination && tableListSystem">
+        <label class="show">Show</label>
+        <ng-select (change)="changeItemsPerPage()" [(ngModel)]="itemsPerPage" [clearable]="false" [searchable]="false"
+          class="show-drop">
+          <ng-option [value]="10">10</ng-option>
+          <ng-option [value]="50">50</ng-option>
+          <ng-option [value]="100">100</ng-option>
+        </ng-select>
+        <div class="container-pagination">
+          <pagination-controls id="{{this.id}}" previousLabel="Previous" nextLabel="Next" [responsive]="true"
+            (pageChange)="changePage($event)">
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

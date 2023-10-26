@@ -14,17 +14,49 @@ import { SystemService } from 'src/app/services/system.service';
 export class SystemComponent {
   systemForm: FormGroup | any;
   systemSelect = new SelectModel();
+  typeScreen: number = 1;
+  tableListSystem: Array<FinancialSystem> | any;
+  id: string | any;
+
+  page: number = 1;
+  config: any;
+  pagination: boolean = true;
+  itemsPerPage: number = 10
+
+  configPag() {
+    this.id = this.generateIdForPagingConfig();
+    this.config = {
+      id: this.id,
+      currentPage: this.page,
+      itemsPerPage: this.itemsPerPage
+    };
+  }
+
+  generateIdForPagingConfig() {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < 10; i++) {
+      result += characters.charAt(Math.floor(Math.random() *
+        charactersLength));
+    }
+    return result;
+  }
 
   constructor(public menuService: MenuService, public formBuilder: FormBuilder, public systemService: SystemService, public authService: AuthService) { }
 
-  ngOnInit() {
+  ngOnInit()
+  {
     this.menuService.selectedMenu = 2;
-    this.systemForm = this.formBuilder.group({ name: ['', [Validators.required]] })
+    this.configPag();
+    this.ListSystemsUser();
+    this.systemForm = this.formBuilder.group({ name: ['', [Validators.required]] });
   }
 
   dataForm() { return this.systemForm.controls; }
 
-  send() {
+  send()
+  {
     var dados = this.dataForm();
     let item = new FinancialSystem();
     item.Name = dados["name"].value;
@@ -44,5 +76,32 @@ export class SystemComponent {
     },
       (error) => console.error(error),
       () => { })
+  }
+
+  register()
+  {
+    this.typeScreen = 2;
+    this.systemForm.reset();
+  }
+
+  changeItemsPerPage() {
+    this.page = 1
+    this.config.currentPage = this.page;
+    this.config.itemsPerPage = this.itemsPerPage;
+  }
+
+  changePage(event: any) {
+    this.page = event;
+    this.config.currentPage = this.page;
+  }
+
+  ListSystemsUser()
+  {
+    this.typeScreen = 1
+    this.systemService.ListSystemsUser(this.authService.getUserEmail()).subscribe((response: Array<FinancialSystem> | any) =>
+    {
+      this.tableListSystem = response;
+    },
+      (error) => console.error(error), () => { })
   }
 }
