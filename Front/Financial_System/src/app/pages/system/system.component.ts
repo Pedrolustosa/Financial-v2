@@ -121,7 +121,7 @@ export class SystemComponent {
           this.itemEdit = reponse;
           this.typeScreen = 2;
           var data = this.dataForm();
-          data["name"].setValue(this.itemEdit.Nome)
+          data["name"].setValue(this.itemEdit.Name)
         }
       },
         (error) => console.error(error),
