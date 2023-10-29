@@ -120,8 +120,8 @@ export class SystemComponent {
         if (reponse) {
           this.itemEdit = reponse;
           this.typeScreen = 2;
-          var dados = this.dataForm();
-          dados["name"].setValue(this.itemEdit.Nome)
+          var data = this.dataForm();
+          data["name"].setValue(this.itemEdit.Nome)
         }
       },
         (error) => console.error(error),
