@@ -45,8 +45,7 @@ export class SystemComponent {
 
   constructor(public menuService: MenuService, public formBuilder: FormBuilder, public systemService: SystemService, public authService: AuthService) { }
 
-  ngOnInit()
-  {
+  ngOnInit() {
     this.menuService.selectedMenu = 2;
     this.configPag();
     this.ListSystemsUser();
@@ -55,31 +54,42 @@ export class SystemComponent {
 
   dataForm() { return this.systemForm.controls; }
 
-  send()
-  {
-    var dados = this.dataForm();
-    let item = new FinancialSystem();
-    item.Name = dados["name"].value;
-    item.Id = 0;
-    item.Month = 0;
-    item.Year = 0;
-    item.ClosingDay = 0;
-    item.GenerateCopyDispense = true;
-    item.MonthCopy = 0;
-    item.YearCopy = 0;
-
-    this.systemService.AddFinancialSystem(item).subscribe((response: FinancialSystem | any) => {
-      this.systemForm.reset();
-      this.systemService.AddUserFinancialSystem(response.id, this.authService.getUserEmail()).subscribe((response: any) => { },
+  send() {
+    var datas = this.dataForm();
+    if (this.itemEdit) {
+      this.itemEdit.Name = datas["name"].value;
+      this.itemEdit.PropertyName = "";
+      this.itemEdit.Message = "";
+      this.itemEdit.Notification = [];
+      this.systemService.UpdateFinancialSystem(this.itemEdit)
+        .subscribe((response: FinancialSystem | any) => {
+          this.systemForm.reset();
+          this.ListSystemsUser();
+        }, (error) => console.error(error),
+          () => { })
+    }
+    else {
+      let item = new FinancialSystem();
+      item.Name = datas["name"].value;
+      item.Id = 0;
+      item.Month = 0;
+      item.Year = 0;
+      item.ClosingDay = 0;
+      item.GenerateCopyDispense = true;
+      item.MonthCopy = 0;
+      item.YearCopy = 0;
+      this.systemService.AddFinancialSystem(item).subscribe((response: FinancialSystem | any) => {
+        this.systemForm.reset();
+        this.systemService.AddUserFinancialSystem(response.id, this.authService.getUserEmail()).subscribe((response: any) => { },
+          (error) => console.error(error),
+          () => { })
+      },
         (error) => console.error(error),
         () => { })
-    },
-      (error) => console.error(error),
-      () => { })
+    }
   }
 
-  register()
-  {
+  register() {
     this.typeScreen = 2;
     this.systemForm.reset();
   }
@@ -95,13 +105,26 @@ export class SystemComponent {
     this.config.currentPage = this.page;
   }
 
-  ListSystemsUser()
-  {
+  ListSystemsUser() {
     this.typeScreen = 1
-    this.systemService.ListSystemsUser(this.authService.getUserEmail()).subscribe((response: Array<FinancialSystem> | any) =>
-    {
+    this.systemService.ListSystemsUser(this.authService.getUserEmail()).subscribe((response: Array<FinancialSystem> | any) => {
       this.tableListSystem = response;
     },
       (error) => console.error(error), () => { })
+  }
+
+  itemEdit: FinancialSystem | any;
+  edit(id: number) {
+    this.systemService.GetFinancialSystemById(id)
+      .subscribe((reponse: FinancialSystem | any) => {
+        if (reponse) {
+          this.itemEdit = reponse;
+          this.typeScreen = 2;
+          var dados = this.dataForm();
+          dados["name"].setValue(this.itemEdit.Nome)
+        }
+      },
+        (error) => console.error(error),
+        () => { })
   }
 }
