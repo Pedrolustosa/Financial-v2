@@ -23,4 +23,12 @@ export class SystemService {
   AddUserFinancialSystem(systemId: number, userEmail: string) {
     return this.httpClient.post<any>(`${this.baseURL}/AddUserFinancialSystem?systemId=${systemId}&userEmail=${userEmail}`, null)
   }
+
+  GetFinancialSystemById(id: number) {
+    return this.httpClient.get(`${this.baseURL}/GetFinancialSystemById?id=${id}`);
+  }
+
+  UpdateFinancialSystem(financialSystem: FinancialSystem) {
+    return this.httpClient.put<FinancialSystem>(`${this.baseURL}/UpdateFinancialSystem`, financialSystem)
+  }
 }
