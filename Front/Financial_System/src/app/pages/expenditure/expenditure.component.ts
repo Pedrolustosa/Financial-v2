@@ -105,34 +105,85 @@ export class ExpenditureComponent {
 
   send() {
     var data = this.dataForm();
-    let item = new Expenditure();
-    item.Id = 0;
-    item.Name = data["name"].value;
-    item.Value = data["value"].value;
-    item.Paid = this.checked;
-    item.ExpiredDate = data["date"].value;
-    item.CategoryId = parseInt(this.selectCategory.id.toString());
-    this.expenditureService.AddExpenditure(item)
-      .subscribe((response: Expenditure) => {
-        this.expenditureForm.reset();
+    if (this.itemEdit) {
+      this.itemEdit.Name = data["name"].value;
+      this.itemEdit.Value = data["value"].value;
+      this.itemEdit.Paid = this.checked;
+      this.itemEdit.ExpiredDate = data["date"].value;
+      this.itemEdit.IdCategoria = parseInt(this.selectCategory.id);
+      this.itemEdit.PropertyName = "";
+      this.itemEdit.Message = "";
+      this.itemEdit.Notification = [];
+      this.expenditureService.UpdateExpenditure(this.itemEdit)
+        .subscribe((response: Expenditure) => {
+          this.expenditureForm.reset();
+          this.listExpenditureUser();
+        }, (error) => console.error(error),
+          () => { })
+    }
+    else {
+      let item = new Expenditure();
+      item.Id = 0;
+      item.Name = data["name"].value;
+      item.Value = data["value"].value;
+      item.Paid = this.checked;
+      item.ExpiredDate = data["date"].value;
+      item.CategoryId = parseInt(this.selectCategory.id.toString());
+      this.expenditureService.AddExpenditure(item)
+        .subscribe((response: Expenditure) => {
+          this.expenditureForm.reset();
+        },
+          (error) => console.error("Error:", error),
+          () => { })
+    }
+  }
+
+  itemEdit: Expenditure | any;
+  edit(id: number) {
+    this.expenditureService.GetExpenditureById(id)
+      .subscribe((reponse: Expenditure | any) => {
+        if (reponse) {
+          this.itemEdit = reponse;
+          this.typeScreen = 2;
+          this.ListCategoriesUser(reponse.CategoryId);
+          var data = this.dataForm();
+          data["name"].setValue(this.itemEdit.Name);
+
+          var dateToString = reponse.expiredDate.toString();
+          var dateFull = dateToString.split('-');
+          var dayFull = dateFull[2].split('T');
+          var day = dayFull[0];
+          var month = dateFull[1];
+          var year = dateFull[0];
+          var dateInput = year + '-' + month + '-' + day;
+
+          data["date"].setValue(dateInput);
+          data["value"].setValue(reponse.Valor);
+
+          this.checked = reponse.Paid;
+        }
       },
-        (error) => console.error("Error:", error),
+        (error) => console.error(error),
         () => { })
   }
 
-  ListCategoriesUser() {
-    this.categoryService.ListCategoriesUser(this.authService.getUserEmail()).subscribe((response: Array<Category> | any) => {
-      var listaCatagorias: SelectModel[] = [];
-      response.forEach(function (x: { id: string; name: string; }) {
-        var item = new SelectModel();
-        item.id = x.id;
-        item.name = x.name;
-        listaCatagorias.push(item);
-      });
-      this.categoryList = listaCatagorias;
-    },
-      (error) => {
-        console.error("Error:", error);
-      })
+  ListCategoriesUser(id: string = "") {
+    this.categoryService.ListCategoriesUser(this.authService.getUserEmail())
+      .subscribe((response: Array<Category> | any) => {
+        var listaCatagorias: SelectModel[] = [];
+        response.forEach((x: { Id: string; name: string; }) => {
+          var item = new SelectModel();
+          item.id = x.Id;
+          item.name = x.name;
+          listaCatagorias.push(item);
+          if (id && id == x.Id) {
+            this.selectCategory = item;
+          }
+        });
+        this.categoryList = listaCatagorias;
+      },
+        (error) => {
+          console.error("Error:", error);
+        })
   }
 }

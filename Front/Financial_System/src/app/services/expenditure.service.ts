@@ -19,4 +19,12 @@ export class ExpenditureService {
   AddExpenditure(expenditure: Expenditure) {
     return this.httpClient.post<Expenditure>(`${this.baseURL}/AddExpenditure`, expenditure)
   }
+
+  GetExpenditureById(id: number) {
+    return this.httpClient.get(`${this.baseURL}/GetExpenditureById?id=${id}`);
+  }
+
+  UpdateExpenditure(expenditure: Expenditure) {
+    return this.httpClient.put<Expenditure>(`${this.baseURL}/UpdateExpenditure`, expenditure)
+  }
 }

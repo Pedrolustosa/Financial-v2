@@ -19,4 +19,12 @@ export class CategoryService {
   AddCategory(category: Category) {
     return this.httpClient.post<Category>(`${this.baseURL}/AddCategory`, category)
   }
+
+  GetCategoryById(id: number) {
+    return this.httpClient.get(`${this.baseURL}/GetCategoryById?id=${id}`);
+  }
+
+  UpdateCategory(category: Category) {
+    return this.httpClient.put<Category>(`${this.baseURL}/UpdateCategory`, category)
+  }
 }
