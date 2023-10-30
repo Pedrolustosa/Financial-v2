@@ -78,7 +78,6 @@ export class CategoryComponent {
         () => { })
   }
 
-
   ngOnInit() {
     this.menuService.selectedMenu = 3;
     this.configPag();
@@ -90,29 +89,66 @@ export class CategoryComponent {
   dataForm() { return this.categoryForm.controls; }
 
   send() {
-    var data = this.dataForm();
-    let item = new Category();
-    item.Name = data["name"].value;
-    item.Id = 0;
-    item.SystemId = parseInt(this.systemSelect.id.toString())
-    this.categoryService.AddCategory(item)
-      .subscribe((response: Category) => {
-        this.categoryForm.reset();
-      }, (error) => console.error(error),
+    var datas = this.dataForm();
+    if (this.itemEdit) {
+      this.itemEdit.Name = datas["name"].value;
+      this.itemEdit.PropertyName = "";
+      this.itemEdit.Message = "";
+      this.itemEdit.Notification = [];
+      this.categoryService.UpdateCategory(this.itemEdit)
+        .subscribe((response: FinancialSystem | any) => {
+          this.categoryForm.reset();
+          this.listCategoriesUser();
+        }, (error) => console.error(error),
+          () => { })
+    }
+    else {
+      let item = new Category();
+      item.Name = datas["name"].value;
+      item.Id = 0;
+      item.SystemId = parseInt(this.systemSelect.id.toString())
+      this.categoryService.AddCategory(item)
+        .subscribe((response: Category) => {
+          this.categoryForm.reset();
+        }, (error) => console.error(error),
+          () => { })
+    }
+  }
+
+  itemEdit: Category | any;
+  edit(id: number) {
+    this.categoryService.GetCategoryById(id)
+      .subscribe((reponse: Category | any) => {
+        if (reponse) {
+          this.itemEdit = reponse;
+          this.typeScreen = 2;
+          var system = reponse;
+          var data = this.dataForm();
+          data["name"].setValue(this.itemEdit.Name);
+          this.listSystemsUser(reponse.SystemId)
+        }
+      },
+        (error) => console.error(error),
         () => { })
   }
 
-  listSystemsUser() {
+  listSystemsUser(id: string = "") {
     this.systemService.ListSystemsUser(this.authService.getUserEmail())
       .subscribe((response: Array<FinancialSystem> | any) => {
         var lisSistemaFinanceiro: SelectModel[] = [];
-        response.forEach(function (x: { id: string; name: string; }) {
+        response.forEach((x: { Id: string; name: string; }) => {
           var item = new SelectModel();
-          item.id = x.id;
+          item.id = x.Id;
           item.name = x.name;
           lisSistemaFinanceiro.push(item);
+          if (id && id == x.Id) {
+            this.systemSelect = item;
+          }
         });
         this.systemList = lisSistemaFinanceiro;
-      })
+      },
+        (error) => {
+          console.error("Error:", error);
+        })
   }
 }

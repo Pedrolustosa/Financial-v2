@@ -75,7 +75,7 @@ namespace WebApi.Controllers
         /// </summary>
         /// <param name="id">The id.</param>
         /// <returns><![CDATA[Task<object>]]></returns>
-        [HttpGet("/api/GetExpenditurById")]
+        [HttpGet("/api/GetExpenditureById")]
         [Produces("application/json")]
         public async Task<object> GetExpenditureById(int id)
         {
